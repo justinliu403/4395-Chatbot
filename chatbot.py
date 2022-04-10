@@ -7,7 +7,7 @@ import os.path
 
 
 if __name__ == '__main__':
-    nflKnowledge = pickle.load(open('knowledgeBase.pickle', 'rb'))
+    nflKnowledge = pickle.load(open('nflTeamKnowledge.p', 'rb'))
     with open(r'.\knowledgeBase.yml', 'w') as file:
         documents = yaml.dump(nflKnowledge, file)
     if os.path.exists("./userBase.p"):
@@ -15,8 +15,6 @@ if __name__ == '__main__':
     else:
         user_knowledge = {}
     print(user_knowledge)
-
-
 
     chatbot = ChatBot("NFL Bot", logic_adapters=[
         'chatterbot.logic.MathematicalEvaluation',
@@ -27,6 +25,7 @@ if __name__ == '__main__':
     corpus_trainer.train('chatterbot.corpus.english')
     corpus_trainer.train("./knowledgeBase.yml")
     trainer = ListTrainer(chatbot)
+
     wants_to_talk = True
     print("Hi my name is NFL Bot! If at any time you want to stop, just enter * \nWhat is your name?")
     user_in = input()
