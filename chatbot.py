@@ -14,12 +14,17 @@ if __name__ == '__main__':
         user_knowledge = pickle.load(open('userBase.p', 'rb'))
     else:
         user_knowledge = {}
+    print(user_knowledge)
 
 
 
-    chatbot = ChatBot(name ="NFL Bot")
+    chatbot = ChatBot("NFL Bot", logic_adapters=[
+        'chatterbot.logic.MathematicalEvaluation',
+        'chatterbot.logic.TimeLogicAdapter',
+        'chatterbot.logic.BestMatch'
+    ])
     corpus_trainer = ChatterBotCorpusTrainer(chatbot)
-    #corpus_trainer.train('chatterbot.corpus.english')
+    corpus_trainer.train('chatterbot.corpus.english')
     corpus_trainer.train("./knowledgeBase.yml")
     trainer = ListTrainer(chatbot)
     wants_to_talk = True
@@ -27,9 +32,14 @@ if __name__ == '__main__':
     user_in = input()
     if user_in in user_knowledge:
         print("Welcome back,", user_in)
+        print("How about them", user_knowledge[user_in].get("favorite team"))
     else:
         print("Nice to meet you,", user_in)
-        user_knowledge[user_in] = []
+        name = user_in
+        user_knowledge[name] = {}
+        user_in = input("Who's your favorite NFL team?")
+        user_knowledge[name] = {"favorite team": user_in}
+    print("I know tons of information about the nfl, ask me about your favorite team!")
 
 
     while wants_to_talk:
