@@ -1,3 +1,8 @@
+#Piyush Mewada and Justin Liu
+#pxm170012 and jtl170000
+#4/10/2022
+#Project 2: Chatbot
+
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 from chatterbot.trainers import ChatterBotCorpusTrainer
